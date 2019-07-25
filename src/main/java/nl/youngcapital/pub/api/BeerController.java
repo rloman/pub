@@ -24,8 +24,24 @@ public class BeerController {
 
         this.beers.add(input);
 
-        input.setId(this.beers.size());
+        int size = this.beers.size();
 
-        return this.beers.get(this.beers.size()-1);
+        Beer lastBeer = this.beers.get(size - 1);
+
+        lastBeer.setId(size);
+
+        return lastBeer;
+    }
+
+    @GetMapping("{id}")
+    public Beer findById(@PathVariable long id) {
+        Beer result = this.beers.get((int) (id - 1));
+
+        return result;
+    }
+
+    @GetMapping("name/{name}")
+    public Beer findByName(@PathVariable String name) {
+        return new Beer(); // for now
     }
 }
